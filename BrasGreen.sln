@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrasGreen.Domain", "BrasGre
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrasGreen.Repository", "BrasGreen.Repository\BrasGreen.Repository.csproj", "{CFFF7057-C52E-41E1-8204-4012E1044E8A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrasGreen.Dto", "BrasGreen.Dto\BrasGreen.Dto.csproj", "{78C77707-5F38-4379-AF0F-114B567E246F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrasGreen.AppService", "BrasGreen.AppService\BrasGreen.AppService.csproj", "{C5D99F64-D60A-4FFF-8C75-EB05018CEEDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{CFFF7057-C52E-41E1-8204-4012E1044E8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFFF7057-C52E-41E1-8204-4012E1044E8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFFF7057-C52E-41E1-8204-4012E1044E8A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78C77707-5F38-4379-AF0F-114B567E246F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78C77707-5F38-4379-AF0F-114B567E246F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78C77707-5F38-4379-AF0F-114B567E246F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78C77707-5F38-4379-AF0F-114B567E246F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5D99F64-D60A-4FFF-8C75-EB05018CEEDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5D99F64-D60A-4FFF-8C75-EB05018CEEDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5D99F64-D60A-4FFF-8C75-EB05018CEEDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5D99F64-D60A-4FFF-8C75-EB05018CEEDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
