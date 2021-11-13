@@ -5,11 +5,19 @@ VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrasGreen.Domain", "BrasGreen.Domain\BrasGreen.Domain.csproj", "{3F8C3388-0C79-44A1-AB0C-5109D1CAD7D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrasGreen.API", "BrasGreen.API\BrasGreen.API.csproj", "{17152635-C23C-49F2-A677-859B130FD884}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrasGreen.API", "BrasGreen.API\BrasGreen.API.csproj", "{17152635-C23C-49F2-A677-859B130FD884}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrasGreen.Infrastructure.Data", "BrasGreen.Infrastructure.Data\BrasGreen.Infrastructure.Data.csproj", "{CC73A1E0-15C0-48EF-BFB5-98929EC22F27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrasGreen.AppService", "BrasGreen.AppService\BrasGreen.AppService.csproj", "{AE01EB72-73B8-41ED-B1E8-50B303B4BB8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrasGreen.AppService", "BrasGreen.AppService\BrasGreen.AppService.csproj", "{AE01EB72-73B8-41ED-B1E8-50B303B4BB8B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{0754B3E8-C88F-49F0-9A0D-C1A0B9A8D1DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{1F6D42B5-F984-4EDC-A0F1-7B8132DE7EA3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppService", "AppService", "{C7D47ADA-1391-48C6-9AF2-CF60B4FC02B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{28BD1A35-757A-4F89-8961-F64F19C5AEAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrasGreen.Infrastructure.Repository", "BrasGreen.Infrastructure.Repository\BrasGreen.Infrastructure.Repository.csproj", "{1FBDD96F-EC2D-4A36-B0E6-90733BEACE36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,17 +33,23 @@ Global
 		{17152635-C23C-49F2-A677-859B130FD884}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17152635-C23C-49F2-A677-859B130FD884}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17152635-C23C-49F2-A677-859B130FD884}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC73A1E0-15C0-48EF-BFB5-98929EC22F27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC73A1E0-15C0-48EF-BFB5-98929EC22F27}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC73A1E0-15C0-48EF-BFB5-98929EC22F27}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC73A1E0-15C0-48EF-BFB5-98929EC22F27}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AE01EB72-73B8-41ED-B1E8-50B303B4BB8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE01EB72-73B8-41ED-B1E8-50B303B4BB8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE01EB72-73B8-41ED-B1E8-50B303B4BB8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE01EB72-73B8-41ED-B1E8-50B303B4BB8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FBDD96F-EC2D-4A36-B0E6-90733BEACE36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FBDD96F-EC2D-4A36-B0E6-90733BEACE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FBDD96F-EC2D-4A36-B0E6-90733BEACE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FBDD96F-EC2D-4A36-B0E6-90733BEACE36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3F8C3388-0C79-44A1-AB0C-5109D1CAD7D6} = {0754B3E8-C88F-49F0-9A0D-C1A0B9A8D1DC}
+		{17152635-C23C-49F2-A677-859B130FD884} = {1F6D42B5-F984-4EDC-A0F1-7B8132DE7EA3}
+		{AE01EB72-73B8-41ED-B1E8-50B303B4BB8B} = {C7D47ADA-1391-48C6-9AF2-CF60B4FC02B7}
+		{1FBDD96F-EC2D-4A36-B0E6-90733BEACE36} = {28BD1A35-757A-4F89-8961-F64F19C5AEAB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {572CE429-8B58-49D1-AD52-62487AD7C097}
