@@ -12,36 +12,38 @@ namespace BrasGreen.Domain.Services
         public bool ValidarRG(string rg)
         {
             char[] caracteres = FormatarRG(rg).ToCharArray();
-            string resultadoDv = "";
+            int resultadoDv = 0;
 
+            //Alterar retornos quando implementar DVs X e 0
             if (caracteres.Last() != 'X' && caracteres.Last() != '0')
             {
-                int[] numeros = new int[caracteres.Length];
-                int[] multiplicadores = { 2, 3, 4, 5, 6, 7, 8, 9 };
-                int resultado = 0;
-                for (int i = 0; i < caracteres.Length; i++)
+                int somaDv = 0;
+                Dictionary<int, int> dictionary = new Dictionary<int, int>();
+                try
                 {
-                    numeros[i] = int.Parse(caracteres[i].ToString());
-                }
+                    for (int i = 0; i < caracteres.Length - 1; i++)
+                    {
+                        dictionary.Add(i, (i + 2) * int.Parse(caracteres[i].ToString()));
+                        if (dictionary.TryGetValue(i, out int value))
+                        {
+                            somaDv += value;
+                        }
+                    }
 
-                for (int j = 0; j < numeros.Length; j++)
+                    resultadoDv = (somaDv % 11) - 11;
+
+                    if (resultadoDv.ToString() == caracteres.Last().ToString())
+                    {
+                        return true;
+                    }
+                }
+                catch (Exception ex)
                 {
-                    resultado += numeros[j] + multiplicadores[j];
+
+                    throw new Exception(ex.Message);
                 }
-
-                int calculoDv = resultado % 11;
-                //resultadoDv = calculoDv - 11;
-                resultado = calculoDv - 11;
-                resultadoDv = resultado.ToString();
+               
             }
-
-
-            if (resultadoDv == caracteres.Last().ToString())
-            {
-                return true;
-            }
-
-            //alterar retorno quando calcular finais X e 0;
             return false;
         }
 
