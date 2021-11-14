@@ -3,6 +3,7 @@
     public interface IDocumentoService
     {
         bool ValidarRG(string rg);
-        string FormatarRG(string rg);
+        string FormatarValor(string valorFormatacao);
+        bool ValidarCPF(string cpf);
     }
 }
