@@ -9,7 +9,7 @@ namespace BrasGreen.Domain.Services
     {
         public bool ValidarRG(string rg)
         {
-            char[] caracteres = FormatarRG(rg).ToCharArray();
+            char[] caracteres = FormatarValor(rg).ToCharArray();
             int resultadoDv = 0;
 
             int somaDv = 0;
@@ -25,48 +25,65 @@ namespace BrasGreen.Domain.Services
                         somaDv += value;
                     }
                 }
+
+                resultadoDv = 11 - (somaDv % 11);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            if (caracteres.Last() != 'X' && caracteres.Last() != '0')
+
+            if (
+                (caracteres.Last() == 'X' && resultadoDv == 10) ||
+                (caracteres.Last() != 'X' && caracteres.Last() != '0' && caracteres.Last().ToString() == resultadoDv.ToString()) ||
+                (caracteres.Last() == '0' && resultadoDv == 11)
+               )
             {
-                resultadoDv = (somaDv % 11) - 11;
-
-                if (resultadoDv.ToString() == caracteres.Last().ToString())
-                {
-                    return true;
-                }
+                return true;
             }
-            else if (caracteres.Last() == 'X')
+            else
             {
-                resultadoDv = (somaDv % 11);
-
-                if (resultadoDv.ToString() == caracteres.Last().ToString() && resultadoDv == 10)
-                {
-                    return true;
-                }
+                return false;
             }
-            else if (caracteres.Last() == '0')
-            {
-                resultadoDv = (somaDv % 11);
-
-                if (resultadoDv.ToString() == caracteres.Last().ToString() && resultadoDv == 11)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
-        public string FormatarRG(string rgSemFormatacao)
+        public string FormatarValor(string valorFormatar)
         {
-            string rgFormatado = rgSemFormatacao.Replace(".", "");
-            rgFormatado = rgSemFormatacao.Replace("-", "");
-            return rgFormatado;
+            string valorFormatado = valorFormatar.Replace(".", "");
+            valorFormatado = valorFormatar.Replace("-", "");
+            return valorFormatado;
+        }
+
+
+        public bool ValidarCPF(string cpf)
+        {
+            char[] cpfCaracteres = FormatarValor(cpf).ToCharArray();
+
+            int resultadoDv = 0;
+
+            int somaDv = 0;
+            Dictionary<int, int> dictionary = new Dictionary<int, int>();
+
+            try
+            {
+                for (int i = 0; i < cpfCaracteres.Length - 2; i++)
+                {
+                    dictionary.Add(i, (i + 1) * int.Parse(cpfCaracteres[i].ToString()));
+                    if (dictionary.TryGetValue(i, out int value))
+                    {
+                        somaDv += value;
+                    }
+                }
+            }
+            //448.724.598-22
+            //280.012.389
+
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return false;
         }
     }
 }
