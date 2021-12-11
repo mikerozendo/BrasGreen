@@ -106,7 +106,7 @@ namespace BrasGreen.Domain.Services
 
         public bool ValidarCnpj(string cnpj)
         {
-            char[] cnpjCarcteres = cnpj.Contains("/") || cnpj.Contains(".") ? FormatarValor(cnpj).ToCharArray() : cnpj.ToCharArray();
+            char[] cnpjCarcteres = cnpj.Contains("/") || cnpj.Contains(".") || cnpj.Contains("-") ? FormatarValor(cnpj).ToCharArray() : cnpj.ToCharArray();
 
             int primeiroDV, segundoDV, somaDv = 0;
             int multiplicador = 6;
