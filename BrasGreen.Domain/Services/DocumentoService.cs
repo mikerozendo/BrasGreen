@@ -79,10 +79,10 @@ namespace BrasGreen.Domain.Services
                     for (int i = 0; i < cpfBase.Count() - 1; i++)
                     {
                         dictionary.Add(i, multiplicador * int.Parse(cpfBase[i].ToString()));
+
                         if (dictionary.TryGetValue(i, out int value))
-                        {
                             somaDv += value;
-                        }
+
                         multiplicador -= 1;
                     }
                     segundoDV = 11 - (somaDv % 11);
@@ -90,21 +90,12 @@ namespace BrasGreen.Domain.Services
                     if (segundoDV.ToString() == cpfBase[10].ToString() ||
                     (segundoDV == 0 && cpfBase[10] == '0') ||
                     (segundoDV == 1 && cpfBase[10] == '0'))
-                    {
-                        dictionary.Clear();
                         return true;
-                    }
                     else
-                    {
-                        dictionary.Clear();
                         return false;
-                    }
                 }
                 else
-                {
-                    dictionary.Clear();
                     return false;
-                }
             }
             catch (Exception ex)
             {
@@ -134,9 +125,8 @@ namespace BrasGreen.Domain.Services
                 {
                     dictionary.Add(i, multiplicador * int.Parse(cnpjCarcteres[i].ToString()));
                     if (dictionary.TryGetValue(i, out int value))
-                    {
                         somaDv += value;
-                    }
+
                     multiplicador++;
                 }
 
@@ -151,9 +141,8 @@ namespace BrasGreen.Domain.Services
                     {
                         dictionary.Add(i, multiplicador * int.Parse(cnpjCarcteres[i].ToString()));
                         if (dictionary.TryGetValue(i, out int value))
-                        {
                             somaDv += value;
-                        }
+
                         multiplicador++;
                     }
 
@@ -161,21 +150,13 @@ namespace BrasGreen.Domain.Services
                     dictionary.Clear();
 
                     if (segundoDV.ToString() == cnpjCarcteres[13].ToString())
-                    {
-                        dictionary.Clear();
                         return true;
-                    }
+                    
                     else
-                    {
-                        dictionary.Clear();
                         return false;
-                    }
                 }
                 else
-                {
-                    dictionary.Clear();
                     return false;
-                }
             }
             catch (Exception ex)
             {
