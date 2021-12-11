@@ -9,7 +9,7 @@ namespace BrasGreen.Domain.Services
     {
         public bool ValidarRG(string rg)
         {
-            char[] rgBase = FormatarValor(rg).ToCharArray();
+            char[] rgBase = rg.Contains("-") || rg.Contains(".") ? FormatarValor(rg).ToCharArray() : rg.ToCharArray();
             int resultadoDv, somaDv = 0;
             Dictionary<int, int> dictionary = new Dictionary<int, int>();
 
