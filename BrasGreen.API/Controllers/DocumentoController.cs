@@ -31,5 +31,12 @@ namespace BrasGreen.API.Controllers
         {
             return _documentoService.ValidarCPF(cpf);
         }
+
+        [HttpGet]
+        [Route(nameof(ValidarCNPJ))]
+        public bool ValidarCNPJ(string cnpj)
+        {
+            return _documentoService.ValidarCnpj(cnpj);
+        }
     }
 }

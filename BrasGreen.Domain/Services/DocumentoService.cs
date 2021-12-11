@@ -104,16 +104,9 @@ namespace BrasGreen.Domain.Services
             }
         }
 
-        public string FormatarCnpj(string cnpj)
-        {
-            string cnpjRaiz = cnpj.Replace(".", "");
-            cnpjRaiz.Replace("/", "");
-            return cnpjRaiz.Replace("-", "");
-        }
-
         public bool ValidarCnpj(string cnpj)
         {
-            char[] cnpjCarcteres = cnpj.Contains("-") || cnpj.Contains(".") ? FormatarCnpj(cnpj).ToCharArray() : cnpj.ToCharArray();
+            char[] cnpjCarcteres = cnpj.Contains("-") || cnpj.Contains(".") ? FormatarValor(cnpj).ToCharArray() : cnpj.ToCharArray();
 
             int primeiroDV, segundoDV, somaDv = 0;
             int multiplicador = 5;
@@ -148,10 +141,7 @@ namespace BrasGreen.Domain.Services
 
                     segundoDV = 11 - (somaDv % 11);
 
-                    if (segundoDV.ToString() == cnpjCarcteres[13].ToString())
-                        return true; 
-                    else
-                        return false;
+                    return segundoDV.ToString() == cnpjCarcteres[13].ToString();
                 }
                 else
                     return false;
