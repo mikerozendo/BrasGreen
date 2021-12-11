@@ -43,6 +43,7 @@ namespace BrasGreen.Domain.Services
         public string FormatarValor(string valorFormatar)
         {
             string formatado = valorFormatar.Contains("-") ? valorFormatar.Replace("-", "") : valorFormatar;
+            formatado = formatado.Contains("/") ? formatado.Replace("/", "") : formatado;
             return formatado.Contains(".") ? formatado.Replace(".", "") : formatado;
         }
 
@@ -112,7 +113,7 @@ namespace BrasGreen.Domain.Services
 
         public bool ValidarCnpj(string cnpj)
         {
-            char[] cnpjCarcteres = FormatarCnpj(cnpj).ToCharArray();
+            char[] cnpjCarcteres = cnpj.Contains("-") || cnpj.Contains(".") ? FormatarCnpj(cnpj).ToCharArray() : cnpj.ToCharArray();
 
             int primeiroDV, segundoDV, somaDv = 0;
             int multiplicador = 5;
@@ -133,7 +134,6 @@ namespace BrasGreen.Domain.Services
                 multiplicador = 6;
                 primeiroDV = 11 - (somaDv % 11);
                 somaDv = 0;
-                dictionary.Clear();
 
                 if (primeiroDV.ToString() == cnpjCarcteres[12].ToString())
                 {
@@ -147,11 +147,9 @@ namespace BrasGreen.Domain.Services
                     }
 
                     segundoDV = 11 - (somaDv % 11);
-                    dictionary.Clear();
 
                     if (segundoDV.ToString() == cnpjCarcteres[13].ToString())
-                        return true;
-                    
+                        return true; 
                     else
                         return false;
                 }
@@ -162,7 +160,6 @@ namespace BrasGreen.Domain.Services
             {
                 throw new Exception(ex.Message);
             }
-
         }
     }
 }
