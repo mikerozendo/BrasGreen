@@ -9,7 +9,7 @@ namespace BrasGreen.Domain.Services
     {
         public bool ValidarRG(string rg)
         {
-            char[] rgBase = FormatarValor(rg).ToCharArray();
+            char[] rgBase = rg.Contains("-") || rg.Contains(".") ? FormatarValor(rg).ToCharArray() : rg.ToCharArray();
             int resultadoDv, somaDv = 0;
             Dictionary<int, int> dictionary = new Dictionary<int, int>();
 
@@ -35,27 +35,21 @@ namespace BrasGreen.Domain.Services
             if ((rgBase.Last() == 'X' && resultadoDv == 10) ||
                 (rgBase.Last() != 'X' && rgBase.Last() != '0' && rgBase.Last().ToString() == resultadoDv.ToString()) ||
                 (rgBase.Last() == '0' && resultadoDv == 11))
-            {
-                dictionary.Clear();
                 return true;
-            }
             else
-            {
-                dictionary.Clear();
                 return false;
-            }
         }
 
         public string FormatarValor(string valorFormatar)
         {
-            string valorFormatado = valorFormatar.Replace(".", "");
-            valorFormatado = valorFormatar.Replace("-", "");
-            return valorFormatado;
+            string formatado = valorFormatar.Contains("-") ? valorFormatar.Replace("-", "") : valorFormatar;
+            formatado = formatado.Contains("/") ? formatado.Replace("/", "") : formatado;
+            return formatado.Contains(".") ? formatado.Replace(".", "") : formatado;
         }
 
         public bool ValidarCPF(string cpf)
         {
-            char[] cpfBase = FormatarValor(cpf).ToCharArray();
+            char[] cpfBase = cpf.Contains("-") || cpf.Contains("-") ? FormatarValor(cpf).ToCharArray() : cpf.ToCharArray();
 
             int primeiroDV, segundoDV, somaDv = 0;
             int multiplicador = 10;
@@ -86,10 +80,10 @@ namespace BrasGreen.Domain.Services
                     for (int i = 0; i < cpfBase.Count() - 1; i++)
                     {
                         dictionary.Add(i, multiplicador * int.Parse(cpfBase[i].ToString()));
+
                         if (dictionary.TryGetValue(i, out int value))
-                        {
                             somaDv += value;
-                        }
+
                         multiplicador -= 1;
                     }
                     segundoDV = 11 - (somaDv % 11);
@@ -97,98 +91,74 @@ namespace BrasGreen.Domain.Services
                     if (segundoDV.ToString() == cpfBase[10].ToString() ||
                     (segundoDV == 0 && cpfBase[10] == '0') ||
                     (segundoDV == 1 && cpfBase[10] == '0'))
-                    {
-                        dictionary.Clear();
                         return true;
-                    }
                     else
-                    {
-                        dictionary.Clear();
                         return false;
-                    }
                 }
                 else
-                {
-                    dictionary.Clear();
                     return false;
-                }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-        }
-
-        public string FormatarCnpj(string cnpj)
-        {
-            string cnpjRaiz = cnpj.Replace(".", "");
-            cnpjRaiz.Replace("/", "");
-            return cnpjRaiz.Replace("-", "");
         }
 
         public bool ValidarCnpj(string cnpj)
         {
-            char[] cnpjCarcteres = FormatarCnpj(cnpj).ToCharArray();
+            char[] cnpjCarcteres = cnpj.Contains("-") || cnpj.Contains(".") ? FormatarValor(cnpj).ToCharArray() : cnpj.ToCharArray();
 
             int primeiroDV, segundoDV, somaDv = 0;
-            int multiplicador = 5;
-
+            int multiplicador = 6;
             Dictionary<int, int> dictionary = new Dictionary<int, int>();
 
             try
             {
-                for (int i = 0; i < cnpjCarcteres.Count() - 2; i++)
+                for (int i = 0; i <= cnpjCarcteres.Count() - 3; i++)
                 {
+                    if (multiplicador > 9)
+                        multiplicador = 2;
+
                     dictionary.Add(i, multiplicador * int.Parse(cnpjCarcteres[i].ToString()));
+
                     if (dictionary.TryGetValue(i, out int value))
-                    {
                         somaDv += value;
-                    }
+
                     multiplicador++;
                 }
 
-                multiplicador = 6;
-                primeiroDV = 11 - (somaDv % 11);
-                somaDv = 0;
+                multiplicador = 5;
+                primeiroDV = somaDv % 11;
                 dictionary.Clear();
 
                 if (primeiroDV.ToString() == cnpjCarcteres[12].ToString())
                 {
-                    for (int i = 0; i < cnpjCarcteres.Count() - 1; i++)
+                    for (int i = 0; i <= cnpjCarcteres.Count() - 2; i++)
                     {
+                        if (multiplicador > 9)
+                            multiplicador = 2;
+
                         dictionary.Add(i, multiplicador * int.Parse(cnpjCarcteres[i].ToString()));
-                        if (dictionary.TryGetValue(i, out int value))
-                        {
-                            somaDv += value;
-                        }
+
+                        if (dictionary.TryGetValue(i, out int value) && i == 0)
+                            somaDv = value;
+                        else if(dictionary.TryGetValue(i, out int obj))
+                            somaDv += obj;
+
                         multiplicador++;
                     }
 
-                    segundoDV = 11 - (somaDv % 11);
-                    dictionary.Clear();
+                    segundoDV = somaDv % 11;
 
-                    if (segundoDV.ToString() == cnpjCarcteres[13].ToString())
-                    {
-                        dictionary.Clear();
-                        return true;
-                    }
-                    else
-                    {
-                        dictionary.Clear();
-                        return false;
-                    }
+                    return segundoDV.ToString() == cnpjCarcteres[13].ToString();
                 }
                 else
-                {
-                    dictionary.Clear();
                     return false;
-                }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            
         }
     }
 }
