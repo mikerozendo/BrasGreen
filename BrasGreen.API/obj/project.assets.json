@@ -75,6 +75,16 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "BrasGreen.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/BrasGreen.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BrasGreen.Domain.dll": {}
+        }
       }
     }
   },
@@ -185,10 +195,16 @@
         "swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "BrasGreen.Domain/1.0.0": {
+      "type": "project",
+      "path": "../BrasGreen.Domain/BrasGreen.Domain.csproj",
+      "msbuildProject": "../BrasGreen.Domain/BrasGreen.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "BrasGreen.Domain >= 1.0.0",
       "Swashbuckle.AspNetCore >= 5.6.3"
     ]
   },
@@ -226,7 +242,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\micha\\OneDrive\\Documentos\\Projetos\\BrasGreen\\BrasGreen.Domain\\BrasGreen.Domain.csproj": {
+              "projectPath": "C:\\Users\\micha\\OneDrive\\Documentos\\Projetos\\BrasGreen\\BrasGreen.Domain\\BrasGreen.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
