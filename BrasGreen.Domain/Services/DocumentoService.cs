@@ -109,37 +109,46 @@ namespace BrasGreen.Domain.Services
             char[] cnpjCarcteres = cnpj.Contains("-") || cnpj.Contains(".") ? FormatarValor(cnpj).ToCharArray() : cnpj.ToCharArray();
 
             int primeiroDV, segundoDV, somaDv = 0;
-            int multiplicador = 5;
-
+            int multiplicador = 6;
             Dictionary<int, int> dictionary = new Dictionary<int, int>();
 
             try
             {
-                for (int i = 0; i < cnpjCarcteres.Count() - 2; i++)
+                for (int i = 0; i <= cnpjCarcteres.Count() - 3; i++)
                 {
+                    if (multiplicador > 9)
+                        multiplicador = 2;
+
                     dictionary.Add(i, multiplicador * int.Parse(cnpjCarcteres[i].ToString()));
+
                     if (dictionary.TryGetValue(i, out int value))
                         somaDv += value;
 
                     multiplicador++;
                 }
 
-                multiplicador = 6;
-                primeiroDV = 11 - (somaDv % 11);
-                somaDv = 0;
+                multiplicador = 5;
+                primeiroDV = somaDv % 11;
+                dictionary.Clear();
 
                 if (primeiroDV.ToString() == cnpjCarcteres[12].ToString())
                 {
-                    for (int i = 0; i < cnpjCarcteres.Count() - 1; i++)
+                    for (int i = 0; i <= cnpjCarcteres.Count() - 2; i++)
                     {
+                        if (multiplicador > 9)
+                            multiplicador = 2;
+
                         dictionary.Add(i, multiplicador * int.Parse(cnpjCarcteres[i].ToString()));
-                        if (dictionary.TryGetValue(i, out int value))
-                            somaDv += value;
+
+                        if (dictionary.TryGetValue(i, out int value) && i == 0)
+                            somaDv = value;
+                        else if(dictionary.TryGetValue(i, out int obj))
+                            somaDv += obj;
 
                         multiplicador++;
                     }
 
-                    segundoDV = 11 - (somaDv % 11);
+                    segundoDV = somaDv % 11;
 
                     return segundoDV.ToString() == cnpjCarcteres[13].ToString();
                 }
