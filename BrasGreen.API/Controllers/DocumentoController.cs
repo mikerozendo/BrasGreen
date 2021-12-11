@@ -24,5 +24,12 @@ namespace BrasGreen.API.Controllers
         {
             return _documentoService.ValidarRG(rg);
         }
+
+        [HttpGet]
+        [Route(nameof(ValidarCPF))]
+        public bool ValidarCPF(string cpf)
+        {
+            return _documentoService.ValidarCPF(cpf);
+        }
     }
 }

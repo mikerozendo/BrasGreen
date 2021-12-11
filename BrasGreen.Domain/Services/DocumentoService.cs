@@ -55,7 +55,7 @@ namespace BrasGreen.Domain.Services
 
         public bool ValidarCPF(string cpf)
         {
-            char[] cpfBase = FormatarValor(cpf).ToCharArray();
+            char[] cpfBase = cpf.Contains("-") || cpf.Contains("-") ? FormatarValor(cpf).ToCharArray() : cpf.ToCharArray();
 
             int primeiroDV, segundoDV, somaDv = 0;
             int multiplicador = 10;
