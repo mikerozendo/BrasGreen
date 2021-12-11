@@ -35,22 +35,15 @@ namespace BrasGreen.Domain.Services
             if ((rgBase.Last() == 'X' && resultadoDv == 10) ||
                 (rgBase.Last() != 'X' && rgBase.Last() != '0' && rgBase.Last().ToString() == resultadoDv.ToString()) ||
                 (rgBase.Last() == '0' && resultadoDv == 11))
-            {
-                dictionary.Clear();
                 return true;
-            }
             else
-            {
-                dictionary.Clear();
                 return false;
-            }
         }
 
         public string FormatarValor(string valorFormatar)
         {
-            string valorFormatado = valorFormatar.Replace(".", "");
-            valorFormatado = valorFormatar.Replace("-", "");
-            return valorFormatado;
+            string formatado = valorFormatar.Contains("-") ? valorFormatar.Replace("-", "") : valorFormatar;
+            return formatado.Contains(".") ? formatado.Replace(".", "") : formatado;
         }
 
         public bool ValidarCPF(string cpf)
@@ -188,7 +181,7 @@ namespace BrasGreen.Domain.Services
             {
                 throw new Exception(ex.Message);
             }
-            
+
         }
     }
 }
